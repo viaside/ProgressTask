@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProgressTask</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="src/Progress.js"></script>
+</head>
+<body>
+    <h1>Progress</h1>
+    <div class="container">
+        <div id="Progress" class="Progress">
+        </div>
+    
+        <div class="State">
+            <label>
+                <input class="Value" id="Value" type="number" value="0">
+                Value
+            </label>
+            <label>
+                <div class="Toggle">
+                    <input id="Animate" type="checkbox">
+                    <span class="slider"></span>
+                </div>
+                Animate
+            </label>
+            <label>
+                <div class="Toggle">
+                    <input id="Hide" type="checkbox">
+                    <span class="slider"></span>
+                </div>
+                Hide
+            </label>
+        </div>
+    </div>
+
+    <script>
+        const ProgressElement = document.getElementById("Progress");
+        const Value = document.getElementById("Value");
+        const Animate = document.getElementById("Animate");
+        const Hide = document.getElementById("Hide");
+
+        const MyProgress = new Progress();
+        MyProgress.start(ProgressElement);
+
+        Value.addEventListener('input', event => {
+            // value input processing
+
+            // check to a max value
+            if(event.target.value > 100){
+                event.target.value -= (event.target.value - 100);
+            }
+
+            // check to a zero value
+            if(event.target.value[0] == 0 && event.target.value.length > 1){
+                event.target.value = event.target.value.substring(1,2);
+            }
+
+            // check to a null value
+            if(event.target.value === null){
+                event.target.value = 0;
+            }
+
+            // check to a empty value
+            if(event.target.value.toString().length === 0 ){
+                event.target.value = 0;
+            }; 
+
+            // check to a natural number
+            if(!Number.isInteger(Number(event.target.value))){
+                event.target.value = Math.round(Number(event.target.value));
+            }
+
+            // set value to progress
+            MyProgress.SetProgressValue(event.target.value);
+        });
+
+        Animate.addEventListener('input', event => {
+            // set animated to progress
+            MyProgress.animate(event.target.checked);
+        });
+
+        Hide.addEventListener('input', event => {
+            // set hide to progress
+            MyProgress.hide(event.target.checked);
+        });
+    </script>
+</body>
+</html>
