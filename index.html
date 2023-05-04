@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProgressTask</title>
     <link rel="stylesheet" href="style.css">
-    <script src="src/Progress.js"></script>
+    <script src="src/Progress.js" type="text/javascript"></script>
 </head>
 <body>
     <h1>Progress</h1>
@@ -42,7 +42,7 @@
         const Animate = document.getElementById("Animate");
         const Hide = document.getElementById("Hide");
 
-        const MyProgress = new Progress();
+        const MyProgress = new Progress(92);
         MyProgress.start(ProgressElement);
 
         Value.addEventListener('input', event => {
