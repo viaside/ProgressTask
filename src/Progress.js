@@ -53,6 +53,7 @@ class Progress {
                 this.ProgressIncrement(interval);
                 if(this.progressValue >= 100){
                     clearInterval(interval);
+                }
             }, 50);
         } else {
             clearInterval(this.intervalId);
