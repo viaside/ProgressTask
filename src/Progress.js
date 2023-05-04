@@ -60,6 +60,7 @@ class Progress {
     ProgressIncrement(interval) {
         if(this.progressValue >= 100){
             clearInterval(this.intervalId);
+            clearInterval(interval);
             document.getElementById("Animate").checked = false;
         } else {
             this.progressValue = Number(this.progressValue) + 1;
@@ -68,12 +69,6 @@ class Progress {
             let circle = document.getElementById("ProgressCircle");
             let dashoffset = this.array * ((100 - this.progressValue)/100);
 
-            circle.animate(
-                [
-                    { from: "stroke-dashoffset: " + dashoffset-1 + ";'" },
-                    { to: "stroke-dashoffset: " + dashoffset + ";'" },
-                ],
-                );
             circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg; stroke-dasharray: ' + this.array +' ;stroke-dashoffset: ' + dashoffset + ';' );
         }
     }
