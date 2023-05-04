@@ -1,7 +1,7 @@
 # ProgressTask
 GitHub pages - https://viaside.github.io/ProgressTask/
 
-##Features 
+## Features 
 The block has an API for managing its state.
 • Blocks are designed to be easily reused in other applications.
 • States:
