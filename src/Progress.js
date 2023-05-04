@@ -52,18 +52,18 @@ class Progress {
             setInterval(() => {
                 this.ProgressIncrement(interval);
                 if(this.progressValue >= 100){
-                    clearInterval(this.intervalId);
+                    clearInterval(1);
                 }
         } 
             }, 50);
         } else {
-            clearInterval(this.intervalId);
+            clearInterval(1);
         }
     }
  
     ProgressIncrement(interval) {
         if(this.progressValue >= 100){
-            clearInterval(this.intervalId);
+            clearInterval(1);
             document.getElementById("Animate").checked = false;
         } else {
             this.progressValue = Number(this.progressValue) + 1;
