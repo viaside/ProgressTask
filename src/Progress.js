@@ -1,8 +1,8 @@
 class Progress {
     constructor(size){
         this.progressValue = 0;
-        this.x = 100;
-        this.y = 100;
+        this.x = size + 8;
+        this.y = size + 8;
         this.r = size? size : 80;
         this.array = 2 * 3.14 * this.r;
         this.offset = this.array * ((100 - this.progressValue)/100); 
@@ -11,7 +11,7 @@ class Progress {
     }
 
     start(element){
-        this.progressElement.setAttributeNS(null, 'style', '');
+        this.progressElement.setAttributeNS(null, 'style', 'width: ' + (this.r*2 + 16) +'; height:' + (this.r*2 + 16) +';');
 
         var circleBg = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circleBg.setAttributeNS(null, 'cx', this.x);
@@ -67,6 +67,13 @@ class Progress {
 
             let circle = document.getElementById("ProgressCircle");
             let dashoffset = this.array * ((100 - this.progressValue)/100);
+
+            circle.animate(
+                [
+                    { from: "stroke-dashoffset: " + dashoffset-1 + ";'" },
+                    { to: "stroke-dashoffset: " + dashoffset + ";'" },
+                ],
+                );
             circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg; stroke-dasharray: ' + this.array +' ;stroke-dashoffset: ' + dashoffset + ';' );
         }
     }
