@@ -48,14 +48,14 @@ class Progress {
     animate(value) {
         if(value){
             this.interval = setInterval(() => {
-                this.ProgressIncrement(this.interval);
+                this.ProgressIncrement();
             }, 50);
         } else {
             clearInterval(this.interval);
         }
     }
  
-    ProgressIncrement(interval) {
+    ProgressIncrement() {
         if(this.progressValue >= 100){
             clearInterval(this.interval);
             document.getElementById("Animate").checked = false;
