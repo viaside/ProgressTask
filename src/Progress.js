@@ -11,8 +11,8 @@ class Progress {
     }
 
     start(element){
-        this.progressElement.setAttributeNS(null, 'style', '');
-
+        this.progressElement.setAttributeNS(null, 'style', 'width: 300; height: 300;');
+        
         var circleBg = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circleBg.setAttributeNS(null, 'cx', this.x);
         circleBg.setAttributeNS(null, 'cy', this.y);
