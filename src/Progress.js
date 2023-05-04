@@ -1,8 +1,8 @@
 class Progress {
     constructor(size){
         this.progressValue = 0;
-        this.x = 150;
-        this.y = 150;
+        this.x = 100;
+        this.y = 100;
         this.r = size? size : 80;
         this.array = 2 * 3.14 * this.r;
         this.offset = this.array * ((100 - this.progressValue)/100); 
