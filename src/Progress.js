@@ -1,11 +1,11 @@
 class Progress {
-    constructor(){
+    constructor(size){
         this.progressValue = 0;
         this.x = 150;
         this.y = 150;
-        this.r = 100;
-        this.arcLength = 2 * 3.14 * this.r;
-        this.dashoffset = this.arcLength * ((100 - this.progressValue)/100); 
+        this.r = size? size : 80;
+        this.array = 2 * 3.14 * this.r;
+        this.offset = this.array * ((100 - this.progressValue)/100); 
         this.progressElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this.intervalId = 0;
     }
@@ -26,7 +26,7 @@ class Progress {
         circle.setAttributeNS(null, 'cx', - this.x);
         circle.setAttributeNS(null, 'cy', this.y);
         circle.setAttributeNS(null, 'r',  this.r);
-        circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg;stroke-dasharray: 628;stroke-dashoffset: ' + this.dashoffset + ';' );
+        circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg;stroke-dasharray: ' + this.array +' ;stroke-dashoffset: ' + this.offset + ';' );
 
         this.progressElement.appendChild(circle);
 
@@ -39,10 +39,10 @@ class Progress {
 
     SetProgressValue(value) {
         this.progressValue = value;
-        let dashoffset = this.arcLength * ((100 - value)/100);
+        let dashoffset = this.array * ((100 - value)/100);
 
         let circle = document.getElementById("ProgressCircle");
-        circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg;stroke-dasharray: 628;stroke-dashoffset: ' + dashoffset + ';' );
+        circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg;stroke-dasharray: ' + this.array +' ;stroke-dashoffset: ' + dashoffset + ';' );
     }
 
     animate(value) {
@@ -56,20 +56,18 @@ class Progress {
             clearInterval(this.intervalId);
         }
     }
-
-
-
+ 
     ProgressIncrement(interval) {
         if(this.progressValue >= 100){
-            clearInterval(interval);
+            clearInterval(this.intervalId);
             document.getElementById("Animate").checked = false;
         } else {
             this.progressValue = Number(this.progressValue) + 1;
             document.getElementById("Value").value = this.progressValue;
 
             let circle = document.getElementById("ProgressCircle");
-            let dashoffset = this.arcLength * ((100 - this.progressValue)/100);
-            circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg; stroke-dasharray: 628;stroke-dashoffset: ' + dashoffset + ';' );
+            let dashoffset = this.array * ((100 - this.progressValue)/100);
+            circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg; stroke-dasharray: ' + this.array +' ;stroke-dashoffset: ' + dashoffset + ';' );
         }
     }
 
