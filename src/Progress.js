@@ -48,7 +48,7 @@ class Progress {
     animate(value) {
         if(value){
             this.interval = setInterval(() => {
-                this.ProgressIncrement(interval);
+                this.ProgressIncrement(this.interval);
             }, 50);
         } else {
             clearInterval(this.interval);
