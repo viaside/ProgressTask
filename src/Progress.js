@@ -7,7 +7,7 @@ class Progress {
         this.array = 2 * 3.14 * this.r;
         this.offset = this.array * ((100 - this.progressValue)/100); 
         this.progressElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        this.intervalId = 0;
+        this.interval = null;
     }
 
     start(element){
@@ -46,24 +46,18 @@ class Progress {
     }
 
     animate(value) {
-        let interval;
         if(value){
-            this.intervalId++;
-            setInterval(() => {
+            this.interval = setInterval(() => {
                 this.ProgressIncrement(interval);
-                if(this.progressValue >= 100){
-                    clearInterval(1);
-                }
-        } 
             }, 50);
         } else {
-            clearInterval(1);
+            clearInterval(this.interval);
         }
     }
  
     ProgressIncrement(interval) {
         if(this.progressValue >= 100){
-            clearInterval(1);
+            clearInterval(this.interval);
             document.getElementById("Animate").checked = false;
         } else {
             this.progressValue = Number(this.progressValue) + 1;
