@@ -38,7 +38,7 @@ The block has an API for managing its state.
    + `.size()` - set Value.
    + `.size` - get size.
    + `.hide()`- set hidden.
-   + `.animate()` - set aninated;
+   + `.animate()` - set animated;
    + `.states` - get states;
    + `.SetProgressValue` - set pregress value;
    + `.getprogressValue` - get progress value;
