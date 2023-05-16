@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProgressTask</title>
     <link rel="stylesheet" href="style.css">
-    <script src="src/Progress.js" type="text/javascript"></script>
+    <script src="src/ProgressElement.js" type="text/javascript"></script>
 </head>
 <body>
     <h1>Progress</h1>
     <div class="container">
-        <div id="Progress" class="Progress">
-        </div>
-    
-        <div class="State">
+        <div id="state" class="State">
             <label>
                 <input class="Value" id="Value" type="number" value="0">
                 Value
@@ -37,17 +34,21 @@
     </div>
 
     <script>
-        const ProgressElement = document.getElementById("Progress");
+        const state = document.getElementById("state");
+
         const Value = document.getElementById("Value");
         const Animate = document.getElementById("Animate");
         const Hide = document.getElementById("Hide");
 
-        const MyProgress = new Progress(92);
-        MyProgress.start(ProgressElement);
+        customElements.define("progress-element", ProgressElement);
 
+        const progressElement = document.createElement("progress-element");
+        progressElement.size = 92;
+        
+        state.before(progressElement); 
+        
         Value.addEventListener('input', event => {
             // value input processing
-
             // check to a max value
             if(event.target.value > 100){
                 event.target.value -= (event.target.value - 100);
@@ -74,17 +75,17 @@
             }
 
             // set value to progress
-            MyProgress.SetProgressValue(event.target.value);
+            progressElement.SetProgressValue(event.target.value);
         });
 
         Animate.addEventListener('input', event => {
             // set animated to progress
-            MyProgress.animate(event.target.checked);
+            progressElement.animate(event.target.checked);
         });
 
         Hide.addEventListener('input', event => {
             // set hide to progress
-            MyProgress.hide(event.target.checked);
+            progressElement.hide(event.target.checked);
         });
     </script>
 </body>

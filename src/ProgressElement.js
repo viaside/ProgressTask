@@ -1,19 +1,35 @@
-class Progress {
-    constructor(size){
+class ProgressElement extends HTMLElement { 
+    constructor() {
+        super();
+        
         this.progressValue = 0;
-        this.x = size + 8;
-        this.y = size + 8;
-        this.r = size? size : 80;
-        this.array = 2 * 3.14 * this.r;
-        this.offset = this.array * ((100 - this.progressValue)/100); 
+        this._size = 0;
+        this.x = 0;
+        this.y = 0;
+        this.r = 0;
+        this.array = 0;
+        this.offset = 0; 
         this.progressElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this.interval = null;
     }
+    get size() {
+        return this._size;
+    }
 
-    start(element){
+    set size(value) {
+        this.progressValue = 0;
+        this._size = value;
+        this.x = value + 8;
+        this.y = value + 8;
+        this.r = value;
+        this.array = 2 * 3.14 * value;
+        this.offset = this.array * ((100 - this.progressValue)/100); 
+    }
+
+    connectedCallback() {
         this.progressElement.setAttributeNS(null, 'style', 'width: ' + (this.r*2 + 16) +'; height:' + (this.r*2 + 16) +';');
 
-        var circleBg = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        let circleBg = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circleBg.setAttributeNS(null, 'cx', this.x);
         circleBg.setAttributeNS(null, 'cy', this.y);
         circleBg.setAttributeNS(null, 'r',  this.r);
@@ -30,13 +46,9 @@ class Progress {
 
         this.progressElement.appendChild(circle);
 
-        element.appendChild(this.progressElement);
+        this.appendChild(this.progressElement);
     }
-    
-    GetProgressValue() {
-        return this._progressValue;
-    }
-
+     
     SetProgressValue(value) {
         this.progressValue = value;
         let dashoffset = this.array * ((100 - value)/100);
@@ -66,7 +78,8 @@ class Progress {
             let circle = document.getElementById("ProgressCircle");
             let dashoffset = this.array * ((100 - this.progressValue)/100);
 
-            circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg; stroke-dasharray: ' + this.array +' ;stroke-dashoffset: ' + dashoffset + ';' );
+            circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg; stroke-dasharray: ' 
+                                    + this.array +' ;stroke-dashoffset: ' + dashoffset + ';' );
         }
     }
 
