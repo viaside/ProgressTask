@@ -79,6 +79,7 @@ class ProgressElement extends HTMLElement {
             this.onAnimate = false;
             clearInterval(this.interval);
         }
+        return this.progressValue;
     }
  
     ProgressIncrement() {
