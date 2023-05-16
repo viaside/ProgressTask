@@ -15,10 +15,12 @@ The block has an API for managing its state.
 
 ## Usage
    ```bash
+   //index.html
    <script type="module">
       import ProgressElement from './src/ProgressElement.js';
    </script>
 
+   <script>
    customElements.define("progress-element", ProgressElement);
 
    // configure progress element
@@ -27,7 +29,16 @@ The block has an API for managing its state.
 
    // add on body
    document.body.appendChild(progressElement); 
+   </script>
    ```
 
    
 - there is an example of usage in the index.html.
+## Method
+   + `.size()` - set Value.
+   + `.size` - get size.
+   + `.hide()`- set hidden.
+   + `.animate()` - set aninated;
+   + `.states` - get states;
+   + `.SetProgressValue` - set pregress value;
+   + `.getprogressValue` - get progress value;
