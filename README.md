@@ -12,3 +12,22 @@ The block has an API for managing its state.
    - Animated – an independent state in which the block or its elements begin to rotate clockwise with a certain period.
    - Hidden – a state that hides a block from the page.
 -  The application adapts to the screen orientation.
+
+## Usage
+   ```bash
+   <script type="module">
+      import ProgressElement from './src/ProgressElement.js';
+   </script>
+
+   customElements.define("progress-element", ProgressElement);
+
+   // configure progress element
+   const progressElement = document.createElement("progress-element");
+   progressElement.size = "your size";
+
+   // add on body
+   document.body.appendChild(progressElement); 
+   ```
+
+   
+- there is an example of usage in the index.html.
