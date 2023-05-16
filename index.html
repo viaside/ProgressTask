@@ -40,11 +40,14 @@
         const Animate = document.getElementById("Animate");
         const Hide = document.getElementById("Hide");
 
+        // add progress elemennt
         customElements.define("progress-element", ProgressElement);
 
+        // configure progress element
         const progressElement = document.createElement("progress-element");
         progressElement.size = 92;
         value = progressElement.getprogressValue;
+        
         state.before(progressElement); 
         
         Value.addEventListener('input', event => {
