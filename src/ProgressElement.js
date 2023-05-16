@@ -11,10 +11,17 @@ class ProgressElement extends HTMLElement {
         this.offset = 0; 
         this.progressElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this.interval = null;
+
+        this.onAnimate = false;
+        this.onHide = false;
     }
 
     getprogressValue() {
         return this.progressValue;
+    }
+
+    get states() {
+        return this.onAnimate, this.onHide
     }
 
     get size() {
@@ -64,12 +71,13 @@ class ProgressElement extends HTMLElement {
 
     animate(value) {
         if(value){
+            this.onAnimate = true;
             this.interval = setInterval(() => {
                 this.ProgressIncrement();
             }, 50);
         } else {
+            this.onAnimate = false;
             clearInterval(this.interval);
-            return this.progressValue;
         }
     }
  
@@ -86,12 +94,15 @@ class ProgressElement extends HTMLElement {
             circle.setAttributeNS(null, 'style', 'fill: none; stroke-width: 15px;stroke: #005BFF;rotate: -90deg; stroke-dasharray: ' 
                                     + this.array +' ;stroke-dashoffset: ' + dashoffset + ';' );
         }
+
     }
 
     hide(value) {
         if(value){
+            this.onHide = true;
             this.progressElement.style.opacity = 0;
         } else {
+            this.onHide = false;
             this.progressElement.style.opacity = 1;
         }
     }
