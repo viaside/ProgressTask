@@ -12,6 +12,11 @@ class ProgressElement extends HTMLElement {
         this.progressElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this.interval = null;
     }
+
+    getprogressValue() {
+        return this.progressValue;
+    }
+
     get size() {
         return this._size;
     }
@@ -64,16 +69,16 @@ class ProgressElement extends HTMLElement {
             }, 50);
         } else {
             clearInterval(this.interval);
+            return this.progressValue;
         }
     }
  
     ProgressIncrement() {
         if(this.progressValue >= 100){
             clearInterval(this.interval);
-            document.getElementById("Animate").checked = false;
+            return this.progressValue;
         } else {
             this.progressValue = Number(this.progressValue) + 1;
-            document.getElementById("Value").value = this.progressValue;
 
             let circle = document.getElementById("ProgressCircle");
             let dashoffset = this.array * ((100 - this.progressValue)/100);
